@@ -2,13 +2,6 @@
 
 Rancher External DNS service powered by Amazon Route53
 
-#### Changelog
-
-##### v0.6.2
-
-* Adds support for disabling/enforcing external DNS on the host and service level using labels
-* Fixes an issue with lingering TCP keep-alive connections to the Rancher Metadata service
-
 #### Usage
 
 ##### Upgrade Notes
