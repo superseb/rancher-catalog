@@ -20,6 +20,7 @@
     - variable: "MOUNT_DIR"
       label: "Mount Directory"
       description: "The directory on the CIFS server to mount"
+      default: "/"
       type: "string"
     - variable: "MOUNT_OPTS"
       label: "Mount Options"
