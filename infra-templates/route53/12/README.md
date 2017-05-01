@@ -2,6 +2,15 @@
 
 Rancher External DNS service powered by Amazon Route53
 
+#### Changelog
+
+##### v0.6.4
+
+* Support for Rancher server instances with self-signed certs (using `/var/lib/rancher/etc/ssl/ca.crt` from the host)
+* Support for EC2 IAM role credentials for authenticating to Route 53 API
+* Support for using service specific name template with label `io.rancher.service.external_dns_name_template`
+* Depricated AWS Region setting (Route 53 API is not regionalized)
+
 #### Usage
 
 ##### Upgrade Notes
@@ -15,7 +24,7 @@ When running multiple instances of the External DNS service configured to use th
 
 `io.rancher.host.external_dns_ip`     
 Override the IP address used in DNS records for containers running on the host. Defaults to the IP address the host is registered with in Rancher.
-      
+
 `io.rancher.host.external_dns`    
 Accepts 'true' (default) or 'false'    
 When this is set to 'false' no DNS records will ever be created for containers running on this host.
@@ -27,7 +36,10 @@ Accepts 'always', 'never' or 'auto' (default)
 - `always`: Always create DNS records for this service
 - `never`: Never create DNS records for this service
 - `auto`: Create DNS records for this service if it exposes ports on the host
-     
+
+`io.rancher.service.external_dns_name_template`
+Override the DNS name template for specific services (see below)
+
 ##### Custom DNS name template
 
 By default DNS entries are named `<service>.<stack>.<environment>.<domain>`.    
@@ -74,6 +86,6 @@ Make sure that the AWS security credentials (Access Key ID / Secret Access Key) 
         }
     ]
 }
-``` 
+```
 
 Note: When using this JSON document to create a custom IAM policy in AWS, replace `<HOSTED_ZONE_ID>` with the ID of the Route53 hosted zone or use a wildcard ('*').
