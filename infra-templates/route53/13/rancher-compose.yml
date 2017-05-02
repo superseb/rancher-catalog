@@ -1,3 +1,4 @@
+# notemplating
 .catalog:
   name: "Route53 DNS"
   version: "v0.6.4.1"
@@ -34,10 +35,10 @@
       label: "DNS Name Template"
       description: |
         Name template used to construct the subdomain part (left of the hosted zone name) of the DNS record names.
-        Supported placeholders: {{`%{{service_name}}, %{{stack_name}}, %{{environment_name}}`}}.
+        Supported placeholders: %{{service_name}}, %{{stack_name}}, %{{environment_name}}.
         By default DNS entries will be named '<service>.<stack>.<environment>.<domain>'.
       type: "string"
-      default: "{{`%{{service_name}}.%{{stack_name}}.%{{environment_name}}`}}"
+      default: "%{{service_name}}.%{{stack_name}}.%{{environment_name}}"
       required: false
     - variable: "HEALTH_CHECK"
       label: "Health Check Interval"

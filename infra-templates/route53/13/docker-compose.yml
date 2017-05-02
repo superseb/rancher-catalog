@@ -1,3 +1,4 @@
+# notemplating
 route53:
   image: rancher/external-dns:v0.6.4
   command: -provider=route53
