@@ -246,6 +246,15 @@ rancher-ingress-controller:
         - --provider=rancher
     links:
         - kubernetes
+    health_check:
+        request_line: GET /healthz HTTP/1.0
+        port: 10241
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
+        initializing_timeout: 60000
+        reinitializing_timeout: 60000
 {{- end }}
 
 rancher-kubernetes-auth:
