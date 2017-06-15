@@ -24,6 +24,9 @@ kubelet:
         {{- else if (ne .Values.POD_INFRA_CONTAINER_IMAGE "") }}
         - --pod-infra-container-image=${POD_INFRA_CONTAINER_IMAGE}
         {{- end }}
+        {{- if (ne .Values.KUBELET_OPTS "") }}
+        - ${KUBELET_OPTS}
+        {{- end }}
     image: rancher/k8s:v1.5.4-rancher1-4
     volumes:
         - /run:/run
