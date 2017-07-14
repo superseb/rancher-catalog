@@ -37,6 +37,7 @@ kubelet:
         - /var/lib/docker:/var/lib/docker
         - /var/lib/kubelet:/var/lib/kubelet:shared
         - /var/log/containers:/var/log/containers
+        - /var/log/pods:/var/log/pods
         - rancher-cni-driver:/etc/cni:ro
         - rancher-cni-driver:/opt/cni:ro
         - /dev:/host/dev
@@ -84,6 +85,7 @@ kubelet-unschedulable:
         - /var/lib/docker:/var/lib/docker
         - /var/lib/kubelet:/var/lib/kubelet:shared
         - /var/log/containers:/var/log/containers
+        - /var/log/pods:/var/log/pods
         - rancher-cni-driver:/etc/cni:ro
         - rancher-cni-driver:/opt/cni:ro
         - /dev:/host/dev
