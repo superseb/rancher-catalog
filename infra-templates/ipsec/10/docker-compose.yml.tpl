@@ -9,11 +9,46 @@ services:
       - 500:500/udp
       - 4500:4500/udp
     labels:
-      io.rancher.sidekicks: router,cni-driver
+      io.rancher.sidekicks: router
       io.rancher.scheduler.global: 'true'
       io.rancher.cni.link_mtu_overhead: '0'
       io.rancher.network.macsync: 'true'
       io.rancher.network.arpsync: 'true'
+  router:
+    cap_add:
+      - NET_ADMIN
+    image: rancher/net:v0.11.4
+    network_mode: container:ipsec
+    environment:
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
+    labels:
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent_service.ipsec: 'true'
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'
+    sysctls:
+      net.ipv4.conf.all.send_redirects: '0'
+      net.ipv4.conf.default.send_redirects: '0'
+      net.ipv4.conf.eth0.send_redirects: '0'
+      net.ipv4.xfrm4_gc_thresh: '2147483647'
+  cni-driver:
+    privileged: true
+    image: rancher/net:v0.11.4
+    command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify -F /var/log/rancher-cni.log"
+    network_mode: host
+    pid: host
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.network.cni.binary: 'rancher-bridge'
+      io.rancher.container.dns: 'true'
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'
     network_driver:
       name: Rancher IPsec
       default_network:
@@ -45,37 +80,3 @@ services:
             isDebugLevel: ${RANCHER_DEBUG}
             routes:
             - dst: 169.254.169.250/32
-  router:
-    cap_add:
-      - NET_ADMIN
-    image: rancher/net:v0.11.3
-    network_mode: container:ipsec
-    environment:
-      RANCHER_DEBUG: '${RANCHER_DEBUG}'
-    labels:
-      io.rancher.container.create_agent: 'true'
-      io.rancher.container.agent_service.ipsec: 'true'
-    logging:
-      driver: json-file
-      options:
-        max-size: 25m
-        max-file: '2'
-    sysctls:
-      net.ipv4.conf.all.send_redirects: '0'
-      net.ipv4.conf.default.send_redirects: '0'
-      net.ipv4.conf.eth0.send_redirects: '0'
-      net.ipv4.xfrm4_gc_thresh: '2147483647'
-  cni-driver:
-    privileged: true
-    image: rancher/net:v0.11.3
-    command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify -F /var/log/rancher-cni.log"
-    network_mode: host
-    pid: host
-    labels:
-      io.rancher.network.cni.binary: 'rancher-bridge'
-      io.rancher.container.dns: 'true'
-    logging:
-      driver: json-file
-      options:
-        max-size: 25m
-        max-file: '2'
