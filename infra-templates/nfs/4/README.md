@@ -40,6 +40,25 @@ volumes:
       exportBase: /
 ```
 
+## Preserve Data
+
+In order to preserve a volume's data on the NFS server after the volume is deleted from Rancher, specify `onRemove: retain` in `driver_opts`.
+
+```
+services:
+  foo:
+    image: alpine
+    volumes:
+    - bar:/data
+volumes:
+  bar:
+    driver: rancher-nfs
+    driver_opts:
+      onRemove: retain
+```
+
+## Backwards Compatibility
+
 For backwards compatibility, a volume may be configured to consume and NFS host/export pair. When configured in this manner, no subfolder is created; the root export directory is mounted. Example:
 
 ```
