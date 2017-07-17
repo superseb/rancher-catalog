@@ -1,6 +1,6 @@
 .catalog:
   name: "Rancher VXLAN"
-  version: "v0.1.1"
+  version: "v0.1.2"
   minimum_rancher_version: v1.6.3-rc1
   questions:
     - variable: "DOCKER_BRIDGE"
