@@ -1,5 +1,6 @@
 .catalog:
-  version: 0.0.1
+  version: 0.0.2
+  minimum_rancher_version: v1.6.5-rc1
   questions:
     - variable: RANCHER_DEBUG
       label: "Enable Debug logs"
