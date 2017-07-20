@@ -13,7 +13,9 @@ kubelet:
         - --api_servers=https://kubernetes.kubernetes.rancher.internal:6443
         - --allow-privileged=true
         - --register-node=true
-        {{- if ne .Values.CLOUD_PROVIDER "rancher" }}
+        {{- if eq .Values.CLOUD_PROVIDER "rancher" }}
+        - --cloud-provider=external
+        {{- else }}
         - --cloud-provider=${CLOUD_PROVIDER}
         {{- end }}
         - --healthz-bind-address=0.0.0.0
@@ -29,7 +31,7 @@ kubelet:
         {{- range $i, $elem := splitPreserveQuotes .Values.ADDITIONAL_KUBELET_FLAGS }}
         - {{ $elem }}
         {{- end }}
-    image: rancher/k8s:v1.7.1-rancher1
+    image: rancher/k8s:v1.7.1-rancher2
     volumes:
         - /run:/run
         - /var/run:/var/run
@@ -62,7 +64,11 @@ kubelet-unschedulable:
         - --api_servers=https://kubernetes.kubernetes.rancher.internal:6443
         - --allow-privileged=true
         - --register-node=true
+        {{- if eq .Values.CLOUD_PROVIDER "rancher" }}
+        - --cloud-provider=external
+        {{- else }}
         - --cloud-provider=${CLOUD_PROVIDER}
+        {{- end }}
         - --healthz-bind-address=0.0.0.0
         - --cluster-dns=10.43.0.10
         - --cluster-domain=cluster.local
@@ -77,7 +83,7 @@ kubelet-unschedulable:
         {{- range $i, $elem := splitPreserveQuotes .Values.ADDITIONAL_KUBELET_FLAGS }}
         - {{ $elem }}
         {{- end }}
-    image: rancher/k8s:v1.7.1-rancher1
+    image: rancher/k8s:v1.7.1-rancher2
     volumes:
         - /run:/run
         - /var/run:/var/run
@@ -103,7 +109,7 @@ proxy:
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --v=2
         - --healthz-bind-address=0.0.0.0
-    image: rancher/k8s:v1.7.1-rancher1
+    image: rancher/k8s:v1.7.1-rancher2
     labels:
         io.rancher.container.dns: "true"
         io.rancher.scheduler.global: "true"
@@ -164,7 +170,8 @@ kubernetes:
         {{- end }}
     environment:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
-    image: rancher/k8s:v1.7.1-rancher1
+        RANCHER_LB_SEPARATOR: $RANCHER_LB_SEPARATOR
+    image: rancher/k8s:v1.7.1-rancher2
     links:
         - etcd
         - rancher-kubernetes-auth
@@ -210,7 +217,7 @@ scheduler:
         - kube-scheduler
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --address=0.0.0.0
-    image: rancher/k8s:v1.7.1-rancher1
+    image: rancher/k8s:v1.7.1-rancher2
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
@@ -232,7 +239,7 @@ controller-manager:
         - --address=0.0.0.0
         - --root-ca-file=/etc/kubernetes/ssl/ca.pem
         - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
-    image: rancher/k8s:v1.7.1-rancher1
+    image: rancher/k8s:v1.7.1-rancher2
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
@@ -249,7 +256,7 @@ rancher-cloud-controller-manager:
         - --cloud-provider=rancher
         - --address=0.0.0.0
         - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
-    image: rancher/k8s:v1.7.1-rancher1
+    image: rancher/k8s:v1.7.1-rancher2
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
@@ -279,7 +286,7 @@ rancher-kubernetes-agent:
 
 {{- if eq .Values.ENABLE_RANCHER_INGRESS_CONTROLLER "true" }}
 rancher-ingress-controller:
-    image: rancher/lb-service-rancher:v0.7.6
+    image: rancher/lb-service-rancher:v0.7.8
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
@@ -325,7 +332,7 @@ rancher-kubernetes-auth:
 
 {{- if eq .Values.ENABLE_ADDONS "true" }}
 addon-starter:
-    image: rancher/k8s:v1.7.1-rancher1
+    image: rancher/k8s:v1.7.1-rancher2
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
