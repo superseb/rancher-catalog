@@ -282,7 +282,7 @@ rancher-kubernetes-agent:
 
 {{- if eq .Values.ENABLE_RANCHER_INGRESS_CONTROLLER "true" }}
 rancher-ingress-controller:
-    image: rancher/lb-service-rancher:v0.7.6
+    image: rancher/lb-service-rancher:v0.7.8
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
@@ -291,6 +291,7 @@ rancher-ingress-controller:
         io.rancher.container.agent.role: environmentAdmin
     environment:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
+        RANCHER_LB_SEPARATOR: $RANCHER_LB_SEPARATOR
     command:
         - lb-controller
         - --controller=kubernetes
