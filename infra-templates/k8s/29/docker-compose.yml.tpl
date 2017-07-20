@@ -275,7 +275,7 @@ rancher-kubernetes-agent:
         io.rancher.k8s.agent: "true"
     environment:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
-    image: rancher/kubernetes-agent:v0.6.2
+    image: rancher/kubernetes-agent:v0.6.3
     privileged: true
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
@@ -312,7 +312,7 @@ rancher-ingress-controller:
 {{- end }}
 
 rancher-kubernetes-auth:
-    image: rancher/kubernetes-auth:v0.0.5
+    image: rancher/kubernetes-auth:v0.0.6
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
