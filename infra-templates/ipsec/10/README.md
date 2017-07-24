@@ -11,7 +11,7 @@ Traffic to and from hosts require UDP ports `500` and `4500` to be open.
 This version removes the `cni-driver` service as a sidekick of the `ipsec` service and makes it standalone.
 
 #### [rancher/net:v0.11.4]
-* This image version doesn't have any specific changes for IPSec but the programming logic for VXLAN has been improved.
+* Fixed an issue where custom subnets were forcing `/16`
 
 ### Usage
 

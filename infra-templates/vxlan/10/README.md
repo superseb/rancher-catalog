@@ -12,6 +12,7 @@ The earlier version of this stack would cause a traffic disruption during upgrad
 
 #### [rancher/net:v0.11.4]
 * This image has improved the programming logic for VXLAN to handle upgrade/restart scenarios gracefully without any traffic disruption.
+* Fixed an issue where custom subnets were forcing `/16`
 
 ### Usage
 
