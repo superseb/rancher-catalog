@@ -10,15 +10,13 @@ Traffic to and from hosts require UDP ports `500` and `4500` to be open.
 
 This version removes the `cni-driver` service as a sidekick of the `ipsec` service and makes it standalone.
 
-#### [rancher/net:v0.11.4]
+#### Router and CNI Driver [rancher/net:v0.11.4]
 * Fixed an issue where custom subnets were forcing `/16`
 
-### Usage
-
-#### Configuration options
+### Configuration options
 * `RANCHER_DEBUG`
 
-##### [cni-driver]
+#### cni-driver
 
 * `DOCKER_BRIDGE`
 * `MTU`

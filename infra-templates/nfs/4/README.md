@@ -1,13 +1,13 @@
 ## Rancher NFS
 
-## Changelog - 0.4.0
+### Changelog - 0.4.0
 
-### [rancher/storage-nfs:v0.8.5]
- * Added new driver option `onRemove=retain|purge` to conditionally [preserve data](#preserve-data)
+#### Rancher NFS [rancher/storage-nfs:v0.8.5]
+ * Added new driver option `onRemove=retain|purge` to conditionally preserve data
  * Added support for NFS v3
  * Improved the framework and driver logging
-   
-## Default Configuration
+
+### Default Configuration
 
 The configuration questions below will apply to all volumes by default.
 
@@ -26,7 +26,7 @@ volumes:
     driver: rancher-nfs
 ```
 
-## Custom Configuration
+### Custom Configuration
 
 By providing custom `driver_opts`, a volume may be configured to consume any NFS host/exportBase pair. Just like with the default configuration, a uniquely-named subfolder is created on the NFS server. Example:
 
@@ -46,7 +46,7 @@ volumes:
       exportBase: /
 ```
 
-## Preserve Data
+### Preserve Data
 
 In order to preserve a volume's data on the NFS server after the volume is deleted from Rancher, specify `onRemove: retain` in `driver_opts`.
 
@@ -64,7 +64,7 @@ volumes:
       onRemove: retain
 ```
 
-## Backwards Compatibility
+### Backwards Compatibility
 
 For backwards compatibility, a volume may be configured to consume and NFS host/export pair. When configured in this manner, no subfolder is created; the root export directory is mounted. Example:
 
