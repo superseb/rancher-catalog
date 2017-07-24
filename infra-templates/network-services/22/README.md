@@ -6,18 +6,14 @@ This stack provides the following services:
 * DNS
 * Network Manager
 
-#### Usage
+### Changelog for v0.2.5
 
-##### Configuration options
-###### [dns]
+#### Network Manager [rancher/network-manager:v0.7.5]
+* Fixes the logic of figuring out local networks in an environment to support different CNI plugins.
+
+### Configuration Options
+
+#### dns
 
 * `DNS_RECURSER_TIMEOUT`
 * `TTL`
-
-#### Changelog
-
-##### v0.2.5
-
-###### [rancher/network-manager:v0.7.5]
-* Fixes the logic of figuring out local networks in an environment to support different CNI plugins.
-
