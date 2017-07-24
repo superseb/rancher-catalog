@@ -1,8 +1,12 @@
-rancher-nfs
-===========
+## Rancher NFS
 
-Rancher NFS volumes are created using 
+## Changelog - 0.4.0
 
+### [rancher/storage-nfs:v0.8.5]
+ * Added new driver option `onRemove=retain|purge` to conditionally [preserve data](#preserve-data)
+ * Added support for NFS v3
+ * Improved the framework and driver logging
+   
 ## Default Configuration
 
 The configuration questions below will apply to all volumes by default.
