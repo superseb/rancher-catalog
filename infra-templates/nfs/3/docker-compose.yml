@@ -2,7 +2,7 @@ version: '2'
 services:
   nfs-driver:
     privileged: true
-    image: rancher/storage-nfs:v0.8.3
+    image: superseb/storage-nfs:v0.8.3-varrun
     pid: host
     labels:
       io.rancher.scheduler.global: 'true'
