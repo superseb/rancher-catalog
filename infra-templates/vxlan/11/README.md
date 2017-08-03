@@ -6,14 +6,10 @@ Rancher networking plugin using VXLAN overlay.
 
 Traffic to and from hosts requires UDP port `4789` to be open.
 
-### Changelog - 0.2.0
+### Changelog - v0.2.1
 
-The earlier version of this stack would cause a traffic disruption during upgrades, this version address to solve this problem. Also this version removes the `cni-driver` service as a sidekick of the `vxlan` container and makes it standalone.
-
-#### Router and CNI Driver [rancher/net:v0.11.5]
-* Addresses issue where stopped containers were considered as peers.
-* This image has improved the programming logic for VXLAN to handle upgrade/restart scenarios gracefully without any traffic disruption.
-* Fixed an issue where custom subnets were forcing `/16`
+#### Router and CNI Driver [rancher/net:v0.11.6]
+* Fixes the container fetch logic to address service upgrade issues.
 
 ### Configuration options
 * `RANCHER_DEBUG`
