@@ -1,9 +1,8 @@
 .catalog:
   name: "Rancher VXLAN"
-  version: "v0.2.0"
+  version: "v0.2.1"
   minimum_rancher_version: v1.6.6-rc1
-  maximum_rancher_version: v1.6.6-rc1
-  upgrade_from: 0.0.0
+  upgrade_from: v0.2.0 || >v0.2.0
   questions:
     - variable: "DOCKER_BRIDGE"
       label: "Docker Bridge"
