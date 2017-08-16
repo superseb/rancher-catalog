@@ -104,6 +104,21 @@
     required: false
     default: rancherlb
     type: string
+  - variable: HTTP_PROXY
+    description: The http proxy to be used for k8s components
+    label: HTTP proxy to be used for k8s components
+    required: false
+    type: string
+  - variable: HTTPS_PROXY
+    description: The https proxy to be used for k8s components
+    label: HTTPS proxy to be used for k8s components
+    required: false
+    type: string
+  - variable: NO_PROXY
+    description: The no_proxy to be used for k8s components
+    label: no_proxy to be used for k8s components
+    required: false
+    type: string
 kubernetes:
     metadata:
         sans:

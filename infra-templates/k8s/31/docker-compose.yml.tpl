@@ -28,6 +28,14 @@ kubelet:
         - {{ $elem }}
         {{- end }}
     image: rancher/k8s:v1.7.2-rancher7
+    {{- if ne .Values.HTTP_PROXY "" }}
+    environment:
+        HTTP_PROXY: ${HTTP_PROXY}
+        http_proxy: ${HTTP_PROXY}
+        HTTPS_PROXY: ${HTTPS_PROXY}
+        https_proxy: ${HTTPS_PROXY}
+        NO_PROXY: ${NO_PROXY}
+    {{- end }}
     volumes:
         - /run:/run
         - /var/run:/var/run
@@ -76,6 +84,14 @@ kubelet-unschedulable:
         - {{ $elem }}
         {{- end }}
     image: rancher/k8s:v1.7.2-rancher7
+    {{- if ne .Values.HTTP_PROXY "" }}
+    environment:
+        HTTP_PROXY: ${HTTP_PROXY}
+        http_proxy: ${HTTP_PROXY}
+        HTTPS_PROXY: ${HTTPS_PROXY}
+        https_proxy: ${HTTPS_PROXY}
+        NO_PROXY: ${NO_PROXY}
+    {{- end }}
     volumes:
         - /run:/run
         - /var/run:/var/run
@@ -172,6 +188,13 @@ kubernetes:
         {{- end }}
     environment:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
+        {{- if ne .Values.HTTP_PROXY "" }}
+        HTTP_PROXY: ${HTTP_PROXY}
+        http_proxy: ${HTTP_PROXY}
+        HTTPS_PROXY: ${HTTPS_PROXY}
+        https_proxy: ${HTTPS_PROXY}
+        NO_PROXY: ${NO_PROXY}
+        {{- end }}
     image: rancher/k8s:v1.7.2-rancher7
     links:
         - etcd
@@ -245,6 +268,14 @@ controller-manager:
         - --root-ca-file=/etc/kubernetes/ssl/ca.pem
         - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
     image: rancher/k8s:v1.7.2-rancher7
+    {{- if ne .Values.HTTP_PROXY "" }}
+    environment:
+        HTTP_PROXY: ${HTTP_PROXY}
+        http_proxy: ${HTTP_PROXY}
+        HTTPS_PROXY: ${HTTPS_PROXY}
+        https_proxy: ${HTTPS_PROXY}
+        NO_PROXY: ${NO_PROXY}
+    {{- end }}
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
