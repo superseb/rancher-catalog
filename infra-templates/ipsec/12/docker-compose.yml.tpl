@@ -1,33 +1,29 @@
 version: '2'
 services:
-  vxlan:
+  ipsec:
     # IMPORTANT!!!! DO NOT CHANGE VERSION ON UPGRADE
     image: rancher/net:holder
     command: sh -c "echo Refer to router sidekick for logs; mkfifo f; exec cat f"
-    network_mode: vxlan
+    network_mode: ipsec
     ports:
-      - 4789:4789/udp
+      - 500:500/udp
+      - 4500:4500/udp
     labels:
       io.rancher.sidekicks: router
       io.rancher.scheduler.global: 'true'
       io.rancher.cni.link_mtu_overhead: '0'
-      io.rancher.internal.service.vxlan: 'true'
-      io.rancher.service.selector.link: io.rancher.internal.service.vxlan=true
       io.rancher.network.macsync: 'true'
       io.rancher.network.arpsync: 'true'
-    logging:
-      driver: json-file
-      options:
-        max-size: 25m
-        max-file: '2'
   router:
     cap_add:
       - NET_ADMIN
     image: rancher/net:v0.11.8
-    network_mode: container:vxlan
+    network_mode: container:ipsec
     environment:
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
-    command: start-vxlan.sh
+    labels:
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent_service.ipsec: 'true'
     logging:
       driver: json-file
       options:
@@ -37,6 +33,7 @@ services:
       net.ipv4.conf.all.send_redirects: '0'
       net.ipv4.conf.default.send_redirects: '0'
       net.ipv4.conf.eth0.send_redirects: '0'
+      net.ipv4.xfrm4_gc_thresh: '2147483647'
   cni-driver:
     privileged: true
     image: rancher/net:v0.11.8
@@ -53,9 +50,9 @@ services:
         max-size: 25m
         max-file: '2'
     network_driver:
-      name: Rancher VXLAN
+      name: Rancher IPsec
       default_network:
-        name: vxlan
+        name: ipsec
         host_ports: {{ .Values.HOST_PORTS }}
         subnets:
         - network_address: $SUBNET
@@ -64,7 +61,7 @@ services:
         dns_search:
         - rancher.internal
       cni_config:
-        '10-rancher-vxlan.conf':
+        '10-rancher.conf':
           name: rancher-cni-network
           type: rancher-bridge
           bridge: $DOCKER_BRIDGE
@@ -72,16 +69,15 @@ services:
           logToFile: /var/log/rancher-cni.log
           isDebugLevel: ${RANCHER_DEBUG}
           isDefaultGateway: true
-          hairpinMode: true
           hostNat: true
           hairpinMode: {{  .Values.RANCHER_HAIRPIN_MODE }}
           promiscMode: {{ .Values.RANCHER_PROMISCUOUS_MODE }}
           mtu: ${MTU}
-          linkMTUOverhead: 50
+          linkMTUOverhead: 98
           ipam:
             type: rancher-cni-ipam
             subnetPrefixSize: /{{ .Values.SUBNET_PREFIX }}
             logToFile: /var/log/rancher-cni.log
             isDebugLevel: ${RANCHER_DEBUG}
             routes:
-              - dst: 169.254.169.250/32
+            - dst: 169.254.169.250/32
