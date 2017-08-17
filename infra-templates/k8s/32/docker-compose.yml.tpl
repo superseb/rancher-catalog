@@ -194,7 +194,7 @@ kubectld:
     environment:
         SERVER: http://kubernetes.kubernetes.rancher.internal
         LISTEN: ":8091"
-    image: rancher/kubectld:v0.8.2
+    image: rancher/kubectld:v0.8.3
     links:
         - kubernetes
 
@@ -209,7 +209,7 @@ kubectl-shell:
         io.rancher.k8s.token: "true"
     command:
         - kubectl-shell-entry.sh
-    image: rancher/kubectld:v0.8.2
+    image: rancher/kubectld:v0.8.3
     privileged: true
     health_check:
         port: 10240
