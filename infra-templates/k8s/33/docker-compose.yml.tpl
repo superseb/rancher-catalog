@@ -302,7 +302,7 @@ rancher-ingress-controller:
 {{- end }}
 
 rancher-kubernetes-auth:
-    image: rancher/kubernetes-auth:v0.0.7
+    image: rancher/kubernetes-auth:v0.0.8
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
