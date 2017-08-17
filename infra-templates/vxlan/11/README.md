@@ -8,7 +8,7 @@ Traffic to and from hosts requires UDP port `4789` to be open.
 
 ### Changelog - v0.2.1
 
-#### Router and CNI Driver [rancher/net:v0.11.6]
+#### Router and CNI Driver [rancher/net:v0.11.8]
 * Fixes the container fetch logic to address service upgrade issues.
 * Use of rancher-metadata IP address to avoid name resolution
 
