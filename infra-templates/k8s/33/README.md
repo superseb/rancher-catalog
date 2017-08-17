@@ -1,8 +1,8 @@
-## Kubernetes v1.7.2 
+## Kubernetes v1.7.4
 
 ### Software Versions
 
-* Kubernetes v1.7.2
+* Kubernetes v1.7.4
 * Etcd v3.0.17
 
 ### Required Open Ports on hosts
