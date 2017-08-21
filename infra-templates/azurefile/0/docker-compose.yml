@@ -3,7 +3,7 @@ services:
   azurefile-driver:
     privileged: true
     network_mode: host
-    image: rancher/storage-azurefile:dev
+    image: superseb/storage-azurefile:dev
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.create_agent: 'true'
