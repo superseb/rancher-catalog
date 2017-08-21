@@ -1,0 +1,20 @@
+.catalog:
+  name: "Rancher Azure File Storage"
+  version: "0.1.0"
+  description: |
+    Docker volume plugin for Azure File Storage
+  minimum_rancher_version: v1.5.10-rc2
+  questions:
+  - variable: AZURE_STORAGE_ACCOUNT
+    label: AWS Access Key
+    type: string
+    description: Optional if using IAM Profile
+  - variable: AZURE_STORAGE_ACCOUNT_KEY
+    label: AWS Secret Key
+    type: password
+    description: Optional if using IAM Profile
+azurefile-driver:
+  storage_driver:
+    name: rancher-azurefile
+    scope: environment
+    volume_access_mode: multiHostRW
