@@ -11,7 +11,6 @@ services:
     environment:
       AZURE_STORAGE_ACCOUNT: '${AZURE_STORAGE_ACCOUNT}'
       AZURE_STORAGE_ACCOUNT_KEY: '${AZURE_STORAGE_ACCOUNT_KEY}'
-AZURE_STORAGE_ACCOUNT_KEY
     volumes:
     - /run:/run
     - /var/run:/var/run

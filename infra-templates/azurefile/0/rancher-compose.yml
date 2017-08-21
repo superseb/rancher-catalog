@@ -6,13 +6,11 @@
   minimum_rancher_version: v1.5.10-rc2
   questions:
   - variable: AZURE_STORAGE_ACCOUNT
-    label: AWS Access Key
+    label: Azure Storage Account name
     type: string
-    description: Optional if using IAM Profile
   - variable: AZURE_STORAGE_ACCOUNT_KEY
-    label: AWS Secret Key
+    label: Azure Storage Account key
     type: password
-    description: Optional if using IAM Profile
 azurefile-driver:
   storage_driver:
     name: rancher-azurefile
