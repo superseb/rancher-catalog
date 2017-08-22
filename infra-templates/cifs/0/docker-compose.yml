@@ -2,7 +2,7 @@ version: '2'
 services:
   cifs-driver:
     privileged: true
-    image: rancher/storage-cifs:v0.1
+    image: superseb/storage-cifs:dev
     pid: host
     labels:
       io.rancher.scheduler.global: 'true'
