@@ -110,7 +110,7 @@
     default: rancherlb
     type: string
   - variable: HTTP_PROXY
-    description: To be used when Kubernetes services are deployed on host(s) behind a proxy, i.e.: http://<fqdn>:<port>
+    description: "To be used when Kubernetes services are deployed on host(s) behind a proxy, i.e.: http://<fqdn>:<port>"
     label: HTTP proxy to be used by Kubernetes services
     required: false
     type: string
