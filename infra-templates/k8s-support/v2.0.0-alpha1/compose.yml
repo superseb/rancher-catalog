@@ -82,6 +82,7 @@ services:
     - --network-plugin=cni
     - --cni-conf-dir=/etc/cni/managed.d
     - --pod-infra-container-image=rancher/pause-amd64:3.0
+    - --feature-gates=PersistentLocalVolumes=true
     image: {{$k8sImage}}
     volumes:
     - /run:/run
