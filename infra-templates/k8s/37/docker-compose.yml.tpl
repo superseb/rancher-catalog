@@ -209,6 +209,7 @@ kubernetes:
         - --cloud-config=/etc/kubernetes/cloud-provider-config
         {{- end }}
         - --allow_privileged=true
+        - --anonymous-auth=false
         - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds
         - --client-ca-file=/etc/kubernetes/ssl/ca.pem
         - --tls-cert-file=/etc/kubernetes/ssl/cert.pem
