@@ -1,6 +1,6 @@
 version: '2'
 
-{{- $netManagerImage:="rancher/network-manager:v0.7.18" }}
+{{- $netManagerImage:="superseb/network-manager:iptablessync" }}
 {{- $metadataImage:="rancher/metadata:v0.9.5" }}
 {{- $dnsImage:="rancher/dns:v0.15.3" }}
 
@@ -10,7 +10,7 @@ services:
     privileged: true
     network_mode: host
     pid: host
-    command: plugin-manager --disable-cni-setup --metadata-address 169.254.169.250
+    command: plugin-manager --disable-cni-setup --metadata-address 169.254.169.250 -debug
     environment:
       DOCKER_BRIDGE: docker0
       METADATA_IP: 169.254.169.250
