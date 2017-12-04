@@ -1,9 +1,9 @@
-version: '2'
 
 {{- $netManagerImage:="rancher/network-manager:v0.7.18" }}
 {{- $metadataImage:="rancher/metadata:v0.9.5" }}
 {{- $dnsImage:="rancher/dns:v0.15.3" }}
 
+version: '2'
 services:
   network-manager:
     image: {{$netManagerImage}}
