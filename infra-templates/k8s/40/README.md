@@ -1,21 +1,17 @@
-## Kubernetes v1.8.5
+## Kubernetes v1.9.0
 
 ### Software Versions
 
-* Kubernetes v1.8.5
+* Kubernetes v1.9.0
 * Etcd v2.3.7
 
 ### Upgrading to this Version
 
 Warning: The existing template version _must be_ `v1.2.4-rancher9` or later. Ignoring this will result in data loss. For older templates, please first upgrade to `v1.5.4-rancher1`.
 
-### Changelog for Kubernetes v1.8.5
+### Changelog for Kubernetes v1.9.0
 
-* Added ability to check the versions of add-ons so they are not upgraded if they had been independently upgraded 
-* Added ability to keep config map for SkyDNS if it was set
-* Added ability to configure dashboard resource limits.
-* Added open-iscsi package.
-* Added support for Azure vnet in another resource group.
+* 
 
 ### Required Open Ports on hosts
 
