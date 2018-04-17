@@ -9,6 +9,8 @@
 
 Warning: The existing template version _must be_ `v1.2.4-rancher9` or later. Ignoring this will result in data loss. For older templates, please first upgrade to `v1.5.4-rancher1`.
 
+Warning: Tagging your cluster resources with a `ClusterID` is required in Kubernetes v1.10. This needs to be done before upgrading. Please refer to the [documentation](https://rancher.com/docs/rancher/v1.6/en/kubernetes/providers/#configuring-the-clusterid) on how to tag your cluster resources.
+
 ### Changelog for Kubernetes v1.10.0
 
 * Updated for the latest Kubernetes release.
