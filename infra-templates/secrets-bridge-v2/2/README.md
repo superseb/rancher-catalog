@@ -4,7 +4,9 @@
 
 This volume driver delivers access tokens per-container to authenticate with Hashicorp Vault.
 
-## Changelog v0.3.2
+## Changelog v0.3.2-1
+
+Update healthcheck action to recreate
 
 Secrets Bridge v2 Server [rancher/secrets-bridge-v2:v0.3.2]
 * Updated to change Secrets Bridge from Experimental to GA

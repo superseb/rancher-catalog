@@ -1,6 +1,6 @@
 .catalog:
     name: "Rancher Secrets Bridge V2"
-    version: v0.3.2
+    version: v0.3.2-1
     description: "Volume plugin to fetch and present access tokens to Hashicorp Vault to the container"
     minimum_rancher_version: v1.6.15-rc1
     questions:
@@ -27,7 +27,7 @@ secrets-bridge-v2-server:
       unhealthy_threshold: 3
       initializing_timeout: 60000
       interval: 2000
-      strategy: none
+      strategy: recreate
       request_line: GET "/healthcheck" "HTTP/1.0"
       reinitializing_timeout: 60000
 secrets-bridge-v2-driver:
