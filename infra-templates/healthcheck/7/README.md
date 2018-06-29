@@ -2,7 +2,7 @@
 
 This stack provides a healthcheck service
 
-### Changelog for v0.3.6
+### Changelog for v0.3.7
 
-#### Healthcheck [rancher/healthcheck:v0.3.6]
-* During service upgrade with healthcheck changes, use the healthcheck on the container.
+#### Healthcheck [rancher/healthcheck:v0.3.7]
+* * Added loglevel to the service to help with debugging

@@ -12,7 +12,7 @@ This stack provides the following services:
 * Fixed an issue with iptables rules when accessing expose port from self host.
 
 #### Metadata [rancher/metadata:v0.10.3]
-* Added loglevel to the containers to help with debugging
+* Added loglevel to the service to help with debugging
 
 ### Configuration Options
 
