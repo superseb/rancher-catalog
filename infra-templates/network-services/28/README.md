@@ -14,6 +14,9 @@ This stack provides the following services:
 #### Metadata [rancher/metadata:v0.10.3]
 * Added loglevel to the service to help with debugging
 
+#### DNS [rancher/dns:v0.17.4]
+* Added loglevel to the service to help with debugging
+
 ### Configuration Options
 
 #### dns
