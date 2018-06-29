@@ -3,9 +3,9 @@
 {{- $etcdImage:="rancher/etcd:v2.3.7-13" }}
 {{- $kubectldImage:="rancher/kubectld:v0.8.7" }}
 {{- $etcHostUpdaterImage:="rancher/etc-host-updater:v0.0.3" }}
-{{- $k8sAgentImage:="rancher/kubernetes-agent:v0.6.7" }}
+{{- $k8sAgentImage:="rancher/kubernetes-agent:v0.6.8" }}
 {{- $k8sAuthImage:="rancher/kubernetes-auth:v0.0.8" }}
-{{- $ingressControllerImage:="rancher/lb-service-rancher:v0.7.17" }}
+{{- $ingressControllerImage:="rancher/lb-service-rancher:v0.9.2" }}
 
 kubelet:
     labels:
