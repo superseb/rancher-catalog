@@ -1,7 +1,7 @@
 version: '2'
 services:
   scheduler:
-    image: rancher/scheduler:v0.8.3
+    image: rancher/scheduler:v0.8.4
     command: scheduler --metadata-address 169.254.169.250
     environment:
         RANCHER_DEBUG: '${RANCHER_DEBUG}'
