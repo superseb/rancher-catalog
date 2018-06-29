@@ -327,6 +327,7 @@ controller-manager:
         - --address=0.0.0.0
         - --root-ca-file=/etc/kubernetes/ssl/ca.pem
         - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
+        - --horizontal-pod-autoscaler-use-rest-clients=false
     environment:
         CLOUD_PROVIDER: ${CLOUD_PROVIDER}
         {{- if ne .Values.HTTP_PROXY "" }}
