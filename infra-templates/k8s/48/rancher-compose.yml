@@ -231,6 +231,13 @@
     required: true
     default: 5000
     type: int
+  - variable: RANCHER_METADATA_ADDRESS
+    label: Address of Rancher Metadata
+    description: The hostname or IP address Rancher metadata can be accessed on
+    required: true
+    default: "169.254.169.250"
+    type: string
+
 
 kubernetes:
     metadata:

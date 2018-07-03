@@ -382,6 +382,7 @@ rancher-ingress-controller:
     environment:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
         RANCHER_LB_SEPARATOR: $RANCHER_LB_SEPARATOR
+        RANCHER_METADATA_ADDRESS: $RANCHER_METADATA_ADDRESS
     command:
         - lb-controller
         - --controller=kubernetes
