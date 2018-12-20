@@ -1,7 +1,7 @@
 
-{{- $k8sImage:="rancher/k8s:v1.11.5-rancher1-1" }}
+{{- $k8sImage:="rancher/k8s:v1.12.5-rancher1" }}
 {{- $etcdImage:="rancher/etcd:v2.3.7-17" }}
-{{- $kubectldImage:="rancher/kubectld:v0.8.8" }}
+{{- $kubectldImage:="rancher/kubectld:v0.10.0" }}
 {{- $etcHostUpdaterImage:="rancher/etc-host-updater:v0.0.3" }}
 {{- $k8sAgentImage:="rancher/kubernetes-agent:v0.6.9" }}
 {{- $k8sAuthImage:="rancher/kubernetes-auth:v0.0.8" }}
@@ -64,8 +64,8 @@ kubelet:
         - /run:/run:rprivate
         - /var/run:/var/run:rprivate
         - /sys:/sys:ro,rprivate
-        - /var/lib/docker:/var/lib/docker:rprivate
-        - /var/lib/kubelet:/var/lib/kubelet:shared
+        - /var/lib/docker:/var/lib/docker:rw,rslave,z
+        - /var/lib/kubelet:/var/lib/kubelet:shared,z
         - /var/log/containers:/var/log/containers:rprivate
         - /var/log/pods:/var/log/pods:rprivate
         - rancher-cni-driver:/etc/cni:ro
@@ -134,8 +134,8 @@ kubelet-unschedulable:
         - /run:/run:rprivate
         - /var/run:/var/run:rprivate
         - /sys:/sys:ro,rprivate
-        - /var/lib/docker:/var/lib/docker:rprivate
-        - /var/lib/kubelet:/var/lib/kubelet:shared
+        - /var/lib/docker:/var/lib/docker:rw,rslave,z
+        - /var/lib/kubelet:/var/lib/kubelet:shared,z
         - /var/log/containers:/var/log/containers:rprivate
         - /var/log/pods:/var/log/pods:rprivate
         - rancher-cni-driver:/etc/cni:ro
