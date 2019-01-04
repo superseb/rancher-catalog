@@ -22,7 +22,7 @@ kubelet:
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --register-node=true
         - --cloud-provider=${CLOUD_PROVIDER}
-        {{- if eq .Values.CLOUD_PROVIDER "azure" }}
+        {{- if (or (eq .Values.CLOUD_PROVIDER "azure") (and (eq .Values.CLOUD_PROVIDER "aws") (ne .Values.CLOUD_PROVIDER_CONFIG ""))) }}
         - --cloud-config=/etc/kubernetes/cloud-provider-config
         {{- end }}
         - --allow-privileged=true
@@ -47,6 +47,8 @@ kubelet:
         {{- end }}
     environment:
         CLOUD_PROVIDER: ${CLOUD_PROVIDER}
+        CLOUD_PROVIDER_CONFIG: |
+          ${CLOUD_PROVIDER_CONFIG}
     {{- if ne .Values.HTTP_PROXY "" }}
         HTTP_PROXY: ${HTTP_PROXY}
         HTTPS_PROXY: ${HTTP_PROXY}
@@ -91,7 +93,7 @@ kubelet-unschedulable:
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --register-node=true
         - --cloud-provider=${CLOUD_PROVIDER}
-        {{- if eq .Values.CLOUD_PROVIDER "azure" }}
+        {{- if (or (eq .Values.CLOUD_PROVIDER "azure") (and (eq .Values.CLOUD_PROVIDER "aws") (ne .Values.CLOUD_PROVIDER_CONFIG ""))) }}
         - --cloud-config=/etc/kubernetes/cloud-provider-config
         {{- end }}
         - --allow-privileged=true
@@ -116,6 +118,8 @@ kubelet-unschedulable:
         {{- end }}
     environment:
         CLOUD_PROVIDER: ${CLOUD_PROVIDER}
+        CLOUD_PROVIDER_CONFIG: |
+          ${CLOUD_PROVIDER_CONFIG}
     {{- if ne .Values.HTTP_PROXY "" }}
         HTTP_PROXY: ${HTTP_PROXY}
         HTTPS_PROXY: ${HTTP_PROXY}
@@ -227,7 +231,7 @@ kubernetes:
         - --insecure-bind-address=0.0.0.0
         - --insecure-port=0
         - --cloud-provider=${CLOUD_PROVIDER}
-        {{- if eq .Values.CLOUD_PROVIDER "azure" }}
+        {{- if (or (eq .Values.CLOUD_PROVIDER "azure") (and (eq .Values.CLOUD_PROVIDER "aws") (ne .Values.CLOUD_PROVIDER_CONFIG ""))) }}
         - --cloud-config=/etc/kubernetes/cloud-provider-config
         {{- end }}
         - --allow-privileged=true
@@ -257,6 +261,9 @@ kubernetes:
         - {{ $elem }}
         {{- end }}
     environment:
+        CLOUD_PROVIDER: ${CLOUD_PROVIDER}
+        CLOUD_PROVIDER_CONFIG: |
+          ${CLOUD_PROVIDER_CONFIG}
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
         {{- if ne .Values.HTTP_PROXY "" }}
         HTTP_PROXY: ${HTTP_PROXY}
@@ -343,7 +350,7 @@ controller-manager:
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --allow-untagged-cloud
         - --cloud-provider=${CLOUD_PROVIDER}
-        {{- if eq .Values.CLOUD_PROVIDER "azure" }}
+        {{- if (or (eq .Values.CLOUD_PROVIDER "azure") (and (eq .Values.CLOUD_PROVIDER "aws") (ne .Values.CLOUD_PROVIDER_CONFIG ""))) }}
         - --cloud-config=/etc/kubernetes/cloud-provider-config
         {{- end }}
         - --address=0.0.0.0
@@ -355,6 +362,8 @@ controller-manager:
         {{- end }}
     environment:
         CLOUD_PROVIDER: ${CLOUD_PROVIDER}
+        CLOUD_PROVIDER_CONFIG: |
+          ${CLOUD_PROVIDER_CONFIG}
         {{- if ne .Values.HTTP_PROXY "" }}
         HTTP_PROXY: ${HTTP_PROXY}
         HTTPS_PROXY: ${HTTP_PROXY}
