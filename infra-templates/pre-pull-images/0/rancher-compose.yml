@@ -1,5 +1,4 @@
-version: '2'
-catalog:
+.catalog:
   name: pre-pull-images
   version: v0.2.2
   description: A script to pull images for a specific Rancher version to speed up upgrades
@@ -59,6 +58,6 @@ catalog:
       type: string
       default: v1.6.17
       required: true
-services:
-  pre-pull-images:
-    start_on_create: true
+
+pre-pull-images:
+  start_on_create: true
